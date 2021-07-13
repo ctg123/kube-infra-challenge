@@ -1,0 +1,19 @@
+---
+# vars file for aws_ec2
+instance_tag:
+        - master
+        - wnode1
+        - wnode2
+
+python_pkgs:
+        - boto
+        - boto3
+
+sg_name: default
+region_name: us-east-1
+subnet_name: subnet-03f66804a8128bcc8
+keypair: ansible
+
+# EC2 instance VM (Amazon Linux 2)
+ami_id: ami-09d01d46812c52d7d
+instance_flavor: t2.micro

@@ -1,0 +1,25 @@
+# Setup the AWS EC2 nodes as a Kuberenetes Cluster.
+---
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+        - credentials.yml
+
+  tasks:
+    - name: Running EC2 Role
+      include_role:
+        name: aws_ec2
+
+- hosts: ec2_master
+  gather_facts: no
+  tasks:
+    - name: Running K8s Master Role
+      include_role:
+        name: k8s_master
+
+- hosts: ec2_worker
+  gather_facts: no
+  tasks:
+    - name: Running K8s Worker Role
+      include_role:
+        name: k8s_worker
