@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slearnjproject
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: slearn
+  template:
+    metadata:
+      labels:
+        app: slearn
+    spec:
+      containers:
+        - image: nginx
+          name: cont1
+          ports:
+            -  containerPort: 80
+          resources:
+            limits:
+              cpu: 10m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: slearnjproject-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: slearn
+  ports:
+  - port: 80
+    targetPort: 80
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: slearn-proj-hpa
+spec:
+  maxReplicas: 10
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: slearnjproject
+  targetCPUUtilizationPercentage: 60
