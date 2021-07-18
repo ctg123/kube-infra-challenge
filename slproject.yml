@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: slearnjproject
+  name: slearnproject
 spec:
   replicas: 3
   selector:
@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: slearnjproject-svc
+  name: slearnproject-svc
 spec:
   type: ClusterIP
   selector:
@@ -45,5 +45,5 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: slearnjproject
+    name: slearnproject
   targetCPUUtilizationPercentage: 60
